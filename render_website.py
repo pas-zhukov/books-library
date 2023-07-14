@@ -3,7 +3,7 @@ import json
 
 from livereload import Server, shell
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-
+from more_itertools import chunked
 
 def main():
 
@@ -23,8 +23,11 @@ def render_page():
     )
     template = env.get_template('index_template.html')
 
+    books = get_books_stats('library_books/books_metadata.json')
+    books = tuple(chunked(books, int(len(books)/2)))
     rendered_page = template.render(
-        books=get_books_stats('library_books/books_metadata.json')
+        books_col_1=books[0],
+        books_col_2=books[1]
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
