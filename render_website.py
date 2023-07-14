@@ -30,7 +30,7 @@ def render_page():
     )
     template = env.get_template('index_template.html')
 
-    books = get_books_stats('library_books/books_metadata.json')[:MAX_BOOKS_COUNT]
+    books = get_books_stats('media/library_books/books_metadata.json')[:MAX_BOOKS_COUNT]
     books = tuple(chunked(books, BOOKS_ON_PAGE))
     os.makedirs(PAGES_CATALOG, exist_ok=True)
     for index, books_set in enumerate(books):
