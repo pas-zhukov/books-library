@@ -1,9 +1,16 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
+import os
 import json
+
 
 from livereload import Server, shell
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
+
+PAGES_CATALOG = 'pages/'
+MAX_BOOKS_COUNT = 200
+BOOKS_ON_PAGE = 10
+
 
 def main():
 
@@ -23,17 +30,22 @@ def render_page():
     )
     template = env.get_template('index_template.html')
 
-    books = get_books_stats('library_books/books_metadata.json')
-    books = tuple(chunked(books, int(len(books)/2)))
-    rendered_page = template.render(
-        books_col_1=books[0],
-        books_col_2=books[1]
-    )
+    books = get_books_stats('library_books/books_metadata.json')[:MAX_BOOKS_COUNT]
+    books = tuple(chunked(books, BOOKS_ON_PAGE))
+    os.makedirs(PAGES_CATALOG, exist_ok=True)
+    for index, books_set in enumerate(books):
+        books_set = tuple(chunked(books_set, int(BOOKS_ON_PAGE/2)))
+        rendered_page = template.render(
+            books_col_1=books_set[0],
+            books_col_2=books_set[1],
+            pages_count=len(books),
+            page_number=index+1
+        )
 
-    with open('index.html', 'w', encoding="utf8") as file:
-        file.write(rendered_page)
+        with open(os.path.join(PAGES_CATALOG, f'index{index+1}.html'), 'w+', encoding="utf8") as file:
+            file.write(rendered_page)
 
-    print('Page rendered!')
+    print('Pages rendered!')
 
 
 def get_books_stats(path_to_json: str):
