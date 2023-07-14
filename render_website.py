@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
 
 PAGES_CATALOG = 'pages/'
-MAX_BOOKS_COUNT = 200
+MAX_BOOKS_COUNT = 100
 BOOKS_ON_PAGE = 10
 
 

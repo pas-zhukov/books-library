@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Библиотека онлайн</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Библиотека онлайн</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
 
@@ -19,92 +20,90 @@
 </nav>
 
 <!-- Paginator -->
-<div class="container" style="padding-top: 15px;">
-    <div class="row g-0">
-        <nav aria-label="...">
-          <ul class="pagination">
-              {% if page_number == 1 %}
-                <li class="page-item disabled">
-                  <a class="page-link">Назад</a>
-                </li>
-              {% else %}
-              <li class="page-item">
-              <a class="page-link" href="index{{page_number - 1}}.html">Назад</a>
-                </li>
-              {% endif %}
-
-            {% for index in range(1, page_number) %}
-            <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
-            {% endfor %}
-            <li class="page-item active" aria-current="page">
-              <a class="page-link" href="">{{page_number}}</a>
-            </li>
-            {% for index in range(page_number+1, pages_count+1) %}
-            <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
-            {% endfor %}
-              {% if page_number != pages_count %}
-              <li class="page-item">
-
-              <a class="page-link" href="index{{page_number + 1}}.html">Вперёд</a>
-              </li>
-              {% else %}
-              <li class="page-item disabled">
-              <a class="page-link">Вперёд</a>
-                </li>
-              {% endif %}
-          </ul>
-        </nav>
-    </div>
+<div class="container" style="padding-top: 18px;">
+  <div class="row g-0">
+    <nav aria-label="...">
+      <ul class="pagination">
+        {% if page_number == 1 %}
+          <li class="page-item disabled">
+            <a class="page-link">Назад</a>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="index{{page_number - 1}}.html">Назад</a>
+          </li>
+        {% endif %}
+        {% for index in range(1, page_number) %}
+          <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
+        {% endfor %}
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="">{{page_number}}</a>
+        </li>
+        {% for index in range(page_number+1, pages_count+1) %}
+          <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
+        {% endfor %}
+        {% if page_number != pages_count %}
+          <li class="page-item">
+            <a class="page-link" href="index{{page_number + 1}}.html">Вперёд</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link">Вперёд</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
 </div>
 <!-- Books -->
 <div class="container">
   <div class="row">
-      <div class="col">
-        <!-- Books 1st column -->
-        {% for book in books_col_1 %}
-            <div class="card text-bg-light mb-3" style="max-width: 32rem;">
-                <div class="row g-0" >
-                    <div class="col-md-4" >
-                        <img src="../{{book.img_src}}" class="img-thumbnail" style="height: 240px; width: max-content;" alt="{{book.title}} - {{book.author}}">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{book.title}}</h5>
-                            <p class="card-text">{{book.author}}</p>
-                            <a href="../{{book.book_path}}" target="_blank" class="btn btn-primary">Читать</a>
-                        </div>
-                    </div>
-                </div>
+    <div class="col">
+      <!-- Books 1st column -->
+      {% for book in books_col_1 %}
+      <div class="card text-bg-light mb-3" style="max-width: 32rem;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="../{{book.img_src}}" class="img-thumbnail" style="height: 240px; width: max-content;"
+                 alt="{{book.title}} - {{book.author}}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{book.title}}</h5>
+              <p class="card-text">{{book.author}}</p>
+              <a href="../{{book.book_path}}" target="_blank" class="btn btn-primary">Читать</a>
             </div>
-        {% endfor %}
+          </div>
+        </div>
       </div>
-      <div class="col">
-        <!-- Books 2nd column -->
-        {% for book in books_col_2 %}
-            <div class="card text-bg-light mb-3" style="max-width: 32rem;">
-                <div class="row g-0" >
-                    <div class="col-md-4" >
-                        <img src="../{{book.img_src}}" class="img-thumbnail" style="height: 240px; width: max-content;" alt="{{book.title}} - {{book.author}}">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{book.title}}</h5>
-                            <p class="card-text">{{book.author}}</p>
-                            <a href="../{{book.book_path}}" target="_blank" class="btn btn-primary">Читать</a>
-                        </div>
-                    </div>
-                </div>
+      {% endfor %}
+    </div>
+    <div class="col">
+      <!-- Books 2nd column -->
+      {% for book in books_col_2 %}
+      <div class="card text-bg-light mb-3" style="max-width: 32rem;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="../{{book.img_src}}" class="img-thumbnail" style="height: 240px; width: max-content;"
+                 alt="{{book.title}} - {{book.author}}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{book.title}}</h5>
+              <p class="card-text">{{book.author}}</p>
+              <a href="../{{book.book_path}}" target="_blank" class="btn btn-primary">Читать</a>
             </div>
-        {% endfor %}
+          </div>
+        </div>
       </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
 
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
