@@ -1,10 +1,22 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import json
 
+from livereload import Server, shell
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
 def main():
+
+    render_page()
+
+    server = Server()
+
+    server.watch('index_template.html', render_page)
+
+    server.serve(root='.')
+
+
+def render_page():
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
@@ -18,8 +30,7 @@ def main():
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
 
-    # server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
-    # server.serve_forever()
+    print('Page rendered!')
 
 
 def get_books_stats(path_to_json: str):
