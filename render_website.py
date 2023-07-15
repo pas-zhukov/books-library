@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import os
 import json
+from urllib.parse import urljoin
 
 from livereload import Server, shell
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -18,21 +19,19 @@ def main():
 
     if not cmd_args.render_once:
         server = Server()
-        shell_command = f"""python 'import render_website; 
-                                    render_website.render_pages("{cmd_args.template}", "{cmd_args.pages_catalog}")'"""
-        server.watch(cmd_args.template, shell(shell_command))
+        server.watch(cmd_args.template, render_pages)
         server.serve(root='.')
 
 
 def render_pages(template_path: str = 'template.html',
                  pages_catalog: str = 'pages/',
                  library_path: str = 'media/library_books/'):
+    render_index(pages_catalog)
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
     template = env.get_template(template_path)
-
     books = get_books_stats(os.path.join(library_path, 'books_metadata.json'))[:MAX_BOOKS_COUNT]
     books = tuple(chunked(books, BOOKS_ON_PAGE))
     os.makedirs(pages_catalog, exist_ok=True)
@@ -44,10 +43,8 @@ def render_pages(template_path: str = 'template.html',
             pages_count=len(books),
             page_number=index+1
         )
-
         with open(os.path.join(pages_catalog, f'index{index+1}.html'), 'w+', encoding="utf8") as file:
             file.write(rendered_page)
-
     print('Pages are rendered!')
 
 
@@ -56,7 +53,12 @@ def render_index(pages_catalog: str = 'pages/'):
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml'])
     )
-    template = env.get_template('index_template')
+    template = env.get_template('index_template.html')
+    rendered_page = template.render(
+        pages_catalog=urljoin(pages_catalog, 'index1.html')
+    )
+    with open('index.html', 'w+', encoding="utf8") as file:
+        file.write(rendered_page)
 
 
 def get_books_stats(path_to_json: str):
