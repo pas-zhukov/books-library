@@ -3,7 +3,7 @@ import os
 import json
 from urllib.parse import urljoin
 
-from livereload import Server, shell
+from livereload import Server
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
 
@@ -13,7 +13,6 @@ BOOKS_ON_PAGE = 10
 
 
 def main():
-
     cmd_args = parse_arguments()
     render_pages()
 
