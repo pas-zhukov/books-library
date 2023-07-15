@@ -76,21 +76,10 @@ def parse_arguments():
         help='Template html to render.'
     )
     parser.add_argument(
-        '-p',
-        '--pages_catalog',
-        default='pages/',
-        help='A folder to where save rendered pages.'
-    )
-    parser.add_argument(
         '--render_once',
         help='Render pages without running a server.',
         action='store_true',
         default=False
-    )
-    parser.add_argument(
-        '--library_path',
-        help='Path to library(json, images and books folder).',
-        default='media/library_books/'
     )
     args = parser.parse_args()
     return args
