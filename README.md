@@ -34,6 +34,11 @@ git clone https://github.com/pas-zhukov/books-library.git
 pip install -r requirements.txt
 ```
 
+### Данные для работы
+
+Для работы скрипта необходимо предоставить книги и метаданные книг. Скрипт будет искать их в `media/library_books` (этот путь можно сконфигурировать в коде). Скачать их можно, используя [специальный парсер](https://github.com/pas-zhukov/books-library-parser).
+
+
 ### Запуск
 Запуск осуществляется следующей командой:
 ```shell
