@@ -64,7 +64,7 @@
       <div class="card text-bg-light mb-3" style="max-width: 32rem;">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="../{{book.img_src}}" class="img-thumbnail" style="height: 240px; width: max-content;"
+            <img src="../{{book.img_src | urlencode}}" class="img-thumbnail" style="height: 240px; width: max-content;"
                  alt="{{book.title}} - {{book.author}}">
           </div>
           <div class="col-md-8">
@@ -76,7 +76,7 @@
                   <span class="badge text-bg-secondary">{{genre}}</span>
                 {% endfor %}
               </p>
-              <a href="../{{book.book_path}}" target="_blank" class="btn btn-primary">Читать</a>
+              <a href="../{{book.book_path | urlencode}}" target="_blank" class="btn btn-primary">Читать</a>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
       <div class="card text-bg-light mb-3" style="max-width: 32rem;">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="../{{book.img_src}}" class="img-thumbnail" style="height: 240px; width: max-content;"
+            <img src="../{{book.img_src | urlencode}}" class="img-thumbnail" style="height: 240px; width: max-content;"
                  alt="{{book.title}} - {{book.author}}">
           </div>
           <div class="col-md-8">
@@ -101,7 +101,7 @@
                   <span class="badge text-bg-secondary">{{genre}}</span>
                 {% endfor %}
               </p>
-              <a href="../{{book.book_path}}" target="_blank" class="btn btn-primary">Читать</a>
+              <a href="../{{book.book_path | urlencode}}" target="_blank" class="btn btn-primary">Читать</a>
             </div>
           </div>
         </div>
