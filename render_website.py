@@ -33,15 +33,15 @@ def render_pages(template_path: str = 'template.html',
     books = get_books_stats(os.path.join(library_path, 'books_metadata.json'))[:MAX_BOOKS_COUNT]
     books = tuple(chunked(books, BOOKS_ON_PAGE))
     os.makedirs(pages_catalog, exist_ok=True)
-    for index, books_set in enumerate(books):
+    for index, books_set in enumerate(books, 1):
         books_set = tuple(chunked(books_set, int(BOOKS_ON_PAGE/2)))
         rendered_page = template.render(
             books_col_1=books_set[0],
             books_col_2=books_set[1],
             pages_count=len(books),
-            page_number=index+1
+            page_number=index
         )
-        with open(os.path.join(pages_catalog, f'index{index+1}.html'), 'w+', encoding="utf8") as file:
+        with open(os.path.join(pages_catalog, f'index{index}.html'), 'w+', encoding="utf8") as file:
             file.write(rendered_page)
     print('Pages are rendered!')
 
