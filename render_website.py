@@ -41,7 +41,7 @@ def render_pages(template_path: str = 'template.html',
             pages_count=len(books),
             page_number=index
         )
-        with open(os.path.join(pages_catalog, f'index{index}.html'), 'w+', encoding="utf8") as file:
+        with open(os.path.join(pages_catalog, f'index{index}.html'), 'w+', encoding='utf8') as file:
             file.write(rendered_page)
 
 
@@ -54,7 +54,7 @@ def render_index(pages_catalog: str = 'pages/'):
     rendered_page = template.render(
         pages_catalog=urljoin(pages_catalog, 'index1.html')
     )
-    with open('index.html', 'w+', encoding="utf8") as file:
+    with open('index.html', 'w+', encoding='utf8') as file:
         file.write(rendered_page)
 
 
@@ -82,5 +82,5 @@ def parse_arguments():
     return args
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
