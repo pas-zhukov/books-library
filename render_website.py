@@ -1,12 +1,11 @@
-from argparse import ArgumentParser
 import json
 import os
+from argparse import ArgumentParser
 from urllib.parse import urljoin
 
-from livereload import Server
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from livereload import Server
 from more_itertools import chunked
-
 
 MAX_BOOKS_COUNT = 100
 BOOKS_ON_PAGE = 10
