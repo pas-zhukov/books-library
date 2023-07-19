@@ -24,7 +24,7 @@ def main():
 
 def render_pages(template_path: str = 'template.html',
                  pages_catalog: str = 'pages/',
-                 library_path: str = 'media/library_books/'):
+                 library_path: str = 'media/'):
     render_index(pages_catalog)
     env = Environment(
         loader=FileSystemLoader('.'),
