@@ -43,7 +43,6 @@ def render_pages(template_path: str = 'template.html',
         )
         with open(os.path.join(pages_catalog, f'index{index}.html'), 'w+', encoding="utf8") as file:
             file.write(rendered_page)
-    print('Pages are rendered!')
 
 
 def render_index(pages_catalog: str = 'pages/'):
