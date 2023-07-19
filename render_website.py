@@ -34,7 +34,7 @@ def render_pages(template_path: str = 'template.html',
     books = tuple(chunked(books, BOOKS_ON_PAGE))
     os.makedirs(pages_catalog, exist_ok=True)
     for index, books_set in enumerate(books, 1):
-        books_set = tuple(chunked(books_set, int(BOOKS_ON_PAGE/2)))
+        books_set = tuple(chunked(books_set, int(len(books_set)/2)))
         rendered_page = template.render(
             books_col_1=books_set[0],
             books_col_2=books_set[1],
