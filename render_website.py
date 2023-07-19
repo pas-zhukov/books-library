@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
-import os
 import json
+import os
 from urllib.parse import urljoin
 
 from livereload import Server
