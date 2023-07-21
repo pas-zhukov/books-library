@@ -1,76 +1,75 @@
 <!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Электронная библиотека</title>
-  <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" type="image/ico" href="../static/favicon.ico">
-</head>
-<body>
-<!-- Jinja imports -->
-{% import "macros.html" as  macros %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Электронная библиотека</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/ico" href="../static/favicon.ico">
+  </head>
+  <body>
+    <!-- Jinja imports -->
+    {% import "macros.html" as macros %}
 
-<!-- Navbar -->
-<nav class="navbar" style="background-color: #e3f2fd;">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-      <img src="../static/book.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-bottom">
-      Библиотека
-    </a>
-  </div>
-</nav>
-
-
-<!-- Paginator -->
-<div class="container" style="padding-top: 18px;">
-  <div class="row g-0">
-    <nav aria-label="...">
-      <ul class="pagination justify-content-center">
-        {% if page_number == 1 %}
-          <li class="page-item disabled">
-            <a class="page-link">Назад</a>
-          </li>
-        {% else %}
-          <li class="page-item">
-            <a class="page-link" href="index{{page_number - 1}}.html">Назад</a>
-          </li>
-        {% endif %}
-        {% for index in range(1, page_number) %}
-          <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
-        {% endfor %}
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="">{{page_number}}</a>
-        </li>
-        {% for index in range(page_number+1, pages_count+1) %}
-          <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
-        {% endfor %}
-        {% if page_number != pages_count %}
-          <li class="page-item">
-            <a class="page-link" href="index{{page_number + 1}}.html">Вперёд</a>
-          </li>
-        {% else %}
-          <li class="page-item disabled">
-            <a class="page-link">Вперёд</a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-  </div>
-</div>
-
-<!-- Books -->
-<div class="container">
-  <div class="row">
-    {% for books in books_set %}
-      <div class="col">
-        {{macros.render_books(books)}}
+    <!-- Navbar -->
+    <nav class="navbar" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="../static/book.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-bottom">
+          Библиотека
+        </a>
       </div>
-    {% endfor %}
-  </div>
-</div>
+    </nav>
 
 
-<script src="../static/js/bootstrap.bundle.min.js"></script>
-</body>
+    <!-- Paginator -->
+    <div class="container" style="padding-top: 18px;">
+      <div class="row g-0">
+        <nav aria-label="...">
+          <ul class="pagination justify-content-center">
+            {% if page_number == 1 %}
+              <li class="page-item disabled">
+                <a class="page-link">Назад</a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="index{{page_number - 1}}.html">Назад</a>
+              </li>
+            {% endif %}
+            {% for index in range(1, page_number) %}
+              <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
+            {% endfor %}
+            <li class="page-item active" aria-current="page">
+              <a class="page-link" href="">{{page_number}}</a>
+            </li>
+            {% for index in range(page_number+1, pages_count+1) %}
+              <li class="page-item"><a class="page-link" href="index{{index}}.html">{{index}}</a></li>
+            {% endfor %}
+            {% if page_number != pages_count %}
+              <li class="page-item">
+                <a class="page-link" href="index{{page_number + 1}}.html">Вперёд</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <a class="page-link">Вперёд</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Books -->
+    <div class="container">
+      <div class="row">
+        {% for books in books_set %}
+          <div class="col">
+            {{macros.render_books(books)}}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
