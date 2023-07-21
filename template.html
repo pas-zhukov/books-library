@@ -62,12 +62,11 @@
 <!-- Books -->
 <div class="container">
   <div class="row">
-    <div class="col">
-      {{macros.render_books(books_col_1)}}
-    </div>
-    <div class="col">
-      {{macros.render_books(books_col_2)}}
-    </div>
+    {% for books in books_set %}
+      <div class="col">
+        {{macros.render_books(books)}}
+      </div>
+    {% endfor %}
   </div>
 </div>
 

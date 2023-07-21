@@ -36,8 +36,7 @@ def render_pages(template_path: str = 'template.html',
     for index, books_set in enumerate(books, 1):
         books_set = tuple(chunked(books_set, int(len(books_set)/2)))
         rendered_page = template.render(
-            books_col_1=books_set[0],
-            books_col_2=books_set[1],
+            books_set=books_set,
             pages_count=len(books),
             page_number=index
         )
